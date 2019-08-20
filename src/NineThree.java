@@ -33,7 +33,7 @@ public class NineThree {
         }
         for (int i = start;i < index + 3 && i < str.length() - 3 + cell ; ++i) {
             String temStr = str.substring(index,i+1);
-            if ((temStr.length() < 3 || temStr.compareTo("256") == -1 )) {
+            if ((temStr.length() < 3 || temStr.compareTo("256") < 0 )) {
                 if ( temStr.length() > 1 && temStr.charAt(0) == '0' ) {
                     continue;
                 }
