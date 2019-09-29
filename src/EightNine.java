@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,13 +6,17 @@ import java.util.List;
  */
 public class EightNine {
     public List<Integer> grayCode(int n) {
-        List<Integer> list = new ArrayList<>();
+
+        LinkedList<Integer> list = new LinkedList<>();
         list.add(0);
+        if ( n <= 0 ) {
+            return list;
+        }
         list.add(1);
         for ( int i = 1 ; i < n ; ++i ) {
             int length = list.size();
             for ( int j = length-1 ; j >=0 ; --j ) {
-                list.add( list.get(j) + 1<<i );
+                list.addLast( list.get(j) + (1<<i) );
             }
         }
         return list;

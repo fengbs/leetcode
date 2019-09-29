@@ -2,6 +2,8 @@ import com.sun.deploy.util.StringUtils;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltStrings.split;
+
 /**
  * Created by lideqing@xiaomi.com on 19-7-25
  */
@@ -61,6 +63,30 @@ public class CommonUtil {
 				System.out.print(obj.toString() + " ");
 			}
 			System.out.println();
+	}
+
+	public static void printLinkedList(ListNode listNode) {
+		while ( listNode != null ) {
+			System.out.print(listNode.val+" ");
+			listNode = listNode.next;
+		}
+	}
+
+	public static ListNode LinkedListFromStr(String input) {
+		String [] arr = input.split(",");
+		if ( arr == null || arr.length == 0 ) {
+			return null;
+		}
+		ListNode head = new ListNode(0);
+		ListNode pre = head;
+		for ( String str : arr ) {
+			pre.next = new ListNode(Integer.parseInt(str));
+			pre = pre.next;
+		}
+
+		ListNode res = head.next;
+		head.next = null;
+		return res;
 	}
 
 }
