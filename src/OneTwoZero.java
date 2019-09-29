@@ -12,6 +12,20 @@ public class OneTwoZero {
             return 0;
         }
         LinkedList<Integer> resDp = new LinkedList<>();
+        resDp.addLast(triangle.get(0).get(0));
+        resDp.addFirst(Integer.MAX_VALUE);
+        resDp.addLast(Integer.MAX_VALUE);
+        for (int i = 1 ; i < triangle.size() ; ++i) {
+            for ( int j = 0 ; j < triangle.get(i).size() ; ++j ) {
+                int min1 = resDp.pollFirst();
+                int min2 = resDp.peekFirst();
+                int temMin = Math.min(min1,min2);
+                if (min1 < min2) {
+                    resDp.addLast(triangle.get(i).get(j)+temMin);
+                }
+            }
+            resDp.addLast(Integer.MAX_VALUE);
+        }
         int minValue = Integer.MAX_VALUE;
         for ( Integer value : resDp ) {
             if ( value < minValue ) {
