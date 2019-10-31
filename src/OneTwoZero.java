@@ -8,31 +8,36 @@ import java.util.List;
  */
 public class OneTwoZero {
     public int minimumTotal(List<List<Integer>> triangle) {
-        if ( triangle == null || triangle.size() == 0 ) {
+        if (triangle == null || triangle.size() == 0) {
             return 0;
         }
-        LinkedList<Integer> resDp = new LinkedList<>();
-        resDp.addLast(triangle.get(0).get(0));
-        resDp.addFirst(Integer.MAX_VALUE);
-        resDp.addLast(Integer.MAX_VALUE);
-        for (int i = 1 ; i < triangle.size() ; ++i) {
-            for ( int j = 0 ; j < triangle.get(i).size() ; ++j ) {
-                int min1 = resDp.pollFirst();
-                int min2 = resDp.peekFirst();
-                int temMin = Math.min(min1,min2);
-                if (min1 < min2) {
-                    resDp.addLast(triangle.get(i).get(j)+temMin);
+        List<Integer> cur = new ArrayList<>(triangle.get(0));
+        List<Integer> next = new ArrayList<>();
+        int index = 0;
+        for (int i = 1; i < triangle.size(); ++i) {
+            index = 0;
+            for (int j = 0; j < triangle.get(i).size(); ++j) {
+                if (j==0) {
+                    next.add(triangle.get(i).get(j)+cur.get(index));
+                } else if (index < cur.size()){
+                    next.add(Math.min(cur.get(index-1),cur.get(index))+triangle.get(i).get(j));
+                } else {
+                    next.add(cur.get(index-1)+triangle.get(i).get(j));
                 }
+                ++index;
             }
-            resDp.addLast(Integer.MAX_VALUE);
+            List tem = cur;
+            cur = next;
+            next = tem;
+            next.clear();
         }
-        int minValue = Integer.MAX_VALUE;
-        for ( Integer value : resDp ) {
-            if ( value < minValue ) {
-                minValue = value;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0 ; i < cur.size() ; ++i) {
+            if (cur.get(i) < min) {
+                min = cur.get(i);
             }
         }
-        return minValue;
+        return min;
     }
 
     public static void main ( String []args) {
