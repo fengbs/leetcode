@@ -9,32 +9,33 @@ import java.util.List;
 //TODO 看看耗时
 public class OneTwoZero {
     public int minimumTotal(List<List<Integer>> triangle) {
-        LinkedList<Integer> dp = new LinkedList<>();
-        if (triangle.size() == 0) {
+        if (triangle == null || triangle.size() == 0) {
             return 0;
         }
-        dp.addLast(triangle.get(0).get(0));
+        List<Integer> cur = new ArrayList<>(triangle.get(0));
+        List<Integer> next = new ArrayList<>();
+        int index = 0;
         for (int i = 1; i < triangle.size(); ++i) {
-            int first = 0;
-            int second = 0;
-            List<Integer> ceng = triangle.get(i);
-            for (int j = 0; j < ceng.size(); ++j) {
-                if (j == 0) {
-                    second = dp.pollFirst();
-                    dp.addLast(second + ceng.get(j));
-                } else if (j == ceng.size() - 1) {
-                    dp.addLast(first + ceng.get(j));
+            index = 0;
+            for (int j = 0; j < triangle.get(i).size(); ++j) {
+                if (j==0) {
+                    next.add(triangle.get(i).get(j)+cur.get(index));
+                } else if (index < cur.size()){
+                    next.add(Math.min(cur.get(index-1),cur.get(index))+triangle.get(i).get(j));
                 } else {
-                    second = dp.pollFirst();
-                    dp.addLast(Math.min(first + ceng.get(j), second + ceng.get(j)));
+                    next.add(cur.get(index-1)+triangle.get(i).get(j));
                 }
-                first = second;
+                ++index;
             }
+            List tem = cur;
+            cur = next;
+            next = tem;
+            next.clear();
         }
-        int min = dp.get(0);
-        for (Integer i : dp) {
-            if (i < min) {
-                min = i;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0 ; i < cur.size() ; ++i) {
+            if (cur.get(i) < min) {
+                min = cur.get(i);
             }
         }
         return min;
