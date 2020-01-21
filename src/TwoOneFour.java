@@ -1,6 +1,7 @@
 /**
  * Created by lideqing@xiaomi.com on 19-7-26
  */
+//TODO
 public class TwoOneFour {
 	public String shortestPalindrome( String s ) {
 		StringBuilder sb = new StringBuilder();

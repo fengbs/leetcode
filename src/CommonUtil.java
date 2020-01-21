@@ -65,6 +65,13 @@ public class CommonUtil {
 			System.out.println();
 	}
 
+	public static <T> void printArr( T[] list) {
+		for ( T obj : list ) {
+			System.out.print(obj.toString() + " ");
+		}
+		System.out.println();
+	}
+
 	public static void printLinkedList(ListNode listNode) {
 		while ( listNode != null ) {
 			System.out.print(listNode.val+" ");
