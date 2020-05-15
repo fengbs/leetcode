@@ -49,6 +49,15 @@ public class CommonUtil {
 		return root;
 	}
 
+	public static void printTree(TreeNode node){
+		if (node == null) {
+			return;
+		}
+		System.out.println(node.val);
+		printTree(node.left);
+		printTree(node.right);
+	}
+
 	public static <T> void printList2( List<List<T>> list) {
 		for ( List<T> temList : list ) {
 			for ( T obj : temList ) {
@@ -68,6 +77,43 @@ public class CommonUtil {
 	public static <T> void printArr( T[] list) {
 		for ( T obj : list ) {
 			System.out.print(obj.toString() + " ");
+		}
+		System.out.println();
+	}
+
+	public static <T> void printIntArr( int[] list) {
+		for ( int obj : list ) {
+			System.out.print(obj + " ");
+		}
+		System.out.println();
+	}
+
+	public static <T> void printArr2( T[][] list) {
+		for ( T[] objArr : list ) {
+			for (T obj:objArr) {
+				System.out.print(obj.toString() + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public static void printIntArr2( int[][] list) {
+		for ( int[] objArr : list ) {
+			for (int obj:objArr) {
+				System.out.print(obj + " ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public static void printIntArr( int[][] list) {
+		for ( int[] objArr : list ) {
+			for (int obj:objArr) {
+				System.out.print(obj + " ");
+			}
+			System.out.println();
 		}
 		System.out.println();
 	}

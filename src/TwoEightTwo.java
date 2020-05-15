@@ -11,9 +11,7 @@ public class TwoEightTwo {
 
 	}
 	public List<String> addOperators( String num,int target ) {
-		for ( int i = 0 ; i < num.length() ; ++i ) {
 
-		}
 		return null;
 	}
 }

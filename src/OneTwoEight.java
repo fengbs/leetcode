@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by lideqing@xiaomi.com on 19-7-31
  */
 public class OneTwoEight {
-	public int longestConsecutive( int [] nums ) {
+	/*public int longestConsecutive( int [] nums ) {
 		if ( nums == null || nums.length == 0 ) {
 			return 0;
 		}
@@ -41,11 +41,49 @@ public class OneTwoEight {
 			}
 		}
 		return maxLength;
-	}
+	}*/
 
-	public static void main( String []args ) {
-		OneTwoEight oneTwoEight = new OneTwoEight();
-		int []nums = {0,-1};
-		System.out.println(oneTwoEight.longestConsecutive(nums));
-	}
+    public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int left;
+        int right;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (Integer i : nums) {
+            if (map.containsKey(i)) {
+                continue;
+            }
+            map.put(i, 1);
+            left = i;
+            right = i;
+            int current = i;
+            int newSum = 1;
+            if (map.containsKey(current - 1)) {
+                left = i - map.get(current - 1);
+                newSum += map.get(current - 1);
+            }
+
+            current = i;
+            if (map.containsKey(current + 1)) {
+                right = i + map.get(current + 1);
+                newSum += map.get(current + 1);
+            }
+            map.put(left, newSum);
+            map.put(right, newSum);
+        }
+        int max = 0;
+        for (int res : map.values()) {
+            if (res > max) {
+                max = res;
+            }
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        OneTwoEight oneTwoEight = new OneTwoEight();
+        int[] nums = {4, 0, -4, -2, 2, 5, 2, 0, -8, -8, -8, -8, -1, 7, 4, 5, 5, -4, 6, 6, -3};
+        System.out.println(oneTwoEight.longestConsecutive(nums));
+    }
 }
